@@ -1,9 +1,7 @@
 package com.deflatedpickle.ducknroll.common.api.property
 
-import com.deflatedpickle.ducknroll.common.api.`interface`.IProperty
-
 abstract class PropertyHolder {
-    private val propertyList = mutableMapOf<String, IProperty<*>>()
+    protected val propertyList = mutableMapOf<String, IProperty<*>>()
 
     /**
      * Checks if a property attached to the key exists
@@ -14,6 +12,16 @@ abstract class PropertyHolder {
      * Returns a property cast to the given generic
      */
     fun <T> getProperty(key: String): IProperty<T> = propertyList[key] as IProperty<T>
+
+    /**
+     * Returns a property cast to a compound property
+     */
+    fun <T> getCompoundProperty(key: String): CompoundProperty<T> = propertyList[key] as CompoundProperty<T>
+
+    /**
+     * Returns all the properties
+     */
+    fun <T> getAllProperties(): Map<String, IProperty<T>> = propertyList.mapValues { it.value as IProperty<T> }
 
     /**
      * Uses [hasProperty], returns [getProperty] if true, else null
@@ -28,6 +36,8 @@ abstract class PropertyHolder {
         this.propertyList[key] = property
         return property
     }
+
+    fun <T> putCompoundProperty(key: String, property: IProperty<T>): CompoundProperty<T> = putProperty(key, property) as CompoundProperty<T>
 
     /**
      * Removes all properties

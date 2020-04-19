@@ -1,12 +1,5 @@
 package com.deflatedpickle.ducknroll.common.api.clock
 
-import com.deflatedpickle.ducknroll.common.api.abstract.AbstractClock
-import com.deflatedpickle.ducknroll.common.api.property.BooleanProperty
+import com.deflatedpickle.ducknroll.common.api.entity.IUpdate
 
-open class IntClock(interval: Int) : AbstractClock<Int>(interval) {
-    override fun run() {
-    }
-
-    override fun progress() {
-    }
-}
+open class IntClock<T : IUpdate> : AbstractClock<Int, T>()

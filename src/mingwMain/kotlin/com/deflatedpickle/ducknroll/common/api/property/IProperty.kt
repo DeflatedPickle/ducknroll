@@ -1,4 +1,4 @@
-package com.deflatedpickle.ducknroll.common.api.`interface`
+package com.deflatedpickle.ducknroll.common.api.property
 
 interface IProperty<T> {
     fun getValue(): T

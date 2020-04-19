@@ -1,4 +1,4 @@
-package com.deflatedpickle.ducknroll.common
+package com.deflatedpickle.ducknroll.common.api.entity
 
 import com.deflatedpickle.ducknroll.common.api.property.PropertyHolder
 import com.deflatedpickle.ducknroll.common.api.property.StringProperty
