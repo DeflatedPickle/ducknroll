@@ -7,7 +7,22 @@ import kotlin.system.getTimeNanos
 /**
  * A clock based on real-time ticks
  */
-class TickClock<T : IUpdate>(val interval: Int = 20, val callback: () -> Boolean = { true }) : StepClock<T>(), IRun {
+class RealTimeTickClock<T : IUpdate>(
+        /**
+         * The calling interval, in ticks
+         */
+        val interval: Int = 20,
+        /**
+         * This callback is constantly called, before the [updateCallback]
+         */
+        val constantCallback: (clock: RealTimeTickClock<T>) -> Unit = {},
+        /**
+         * This callback is called when the [getCurrentTicks] is different
+         */
+        val updateCallback: (clock: RealTimeTickClock<T>) -> Unit = {
+            it.tick()
+        }
+) : UpdateClock<T>(), IRun {
     private val _interval: Long = 1_000_000_000L / this.interval
 
     var lastTime = getTimeNanos()
@@ -28,10 +43,10 @@ class TickClock<T : IUpdate>(val interval: Int = 20, val callback: () -> Boolean
             val currentTime = getTimeNanos()
             val currentTicks = getCurrentTicks()
 
+            this.constantCallback(this)
             if (this.getProperty<Boolean>(CommonProperties.RUNNING).getValue()) {
                 if (currentTicks != lastTicks) {
-                    this.tick()
-                    callback()
+                    this.updateCallback(this)
                 }
             }
 

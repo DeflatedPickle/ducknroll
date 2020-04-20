@@ -5,8 +5,6 @@ import com.deflatedpickle.ducknroll.common.api.property.BooleanProperty
 import com.deflatedpickle.ducknroll.common.api.property.PropertyHolder
 
 abstract class AbstractClock<T : IUpdate> : PropertyHolder(), IClock<T> {
-    protected val iUpdateList = mutableListOf<T>()
-
     init {
         /**
          * Whether or not the clock is currently running
@@ -25,14 +23,4 @@ abstract class AbstractClock<T : IUpdate> : PropertyHolder(), IClock<T> {
     override fun start() {
         this.getProperty<Boolean>("running").setValue(true)
     }
-
-    fun addObject(obj: T) {
-        this.iUpdateList.add(obj)
-    }
-
-    fun getObject(index: Int): T =
-            this.iUpdateList[index]
-
-    fun getAllObjects(): List<T> = this.iUpdateList
-
 }

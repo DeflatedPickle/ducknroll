@@ -19,6 +19,8 @@ kotlin {
 
             executable {
                 entryPoint = 'example.main'
+
+                runTask.standardInput = System.in
             }
         }
     }

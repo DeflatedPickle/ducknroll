@@ -3,7 +3,7 @@ package com.deflatedpickle.ducknroll.common.api.util
 import kotlin.reflect.KClass
 
 import com.deflatedpickle.ducknroll.common.api.clock.AbstractClock
-import com.deflatedpickle.ducknroll.common.api.clock.TickClock
+import com.deflatedpickle.ducknroll.common.api.clock.StepTickClock
 
 /**
  * An enum of commonly used properties
@@ -34,7 +34,7 @@ enum class CommonProperties(val key: String, val valueType: KClass<*>) {
     /**
      * The finished state of an object
      *
-     * @sample TickClock.run
+     * @sample StepTickClock.run
      */
     FINISHED("finished", Boolean::class)
 }
