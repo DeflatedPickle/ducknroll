@@ -4,35 +4,35 @@ import com.deflatedpickle.ducknroll.common.api.entity.IUpdate
 import com.deflatedpickle.ducknroll.common.api.property.BooleanProperty
 import com.deflatedpickle.ducknroll.common.api.property.PropertyHolder
 
-abstract class AbstractClock<T : Number, O : IUpdate> : PropertyHolder(),
-    IClock<T, O> {
-    private val iUpdateList = mutableListOf<O>()
+abstract class AbstractClock<T : IUpdate> : PropertyHolder(), IClock<T> {
+    protected val iUpdateList = mutableListOf<T>()
 
     init {
-        this.putProperty("run", BooleanProperty())
+        /**
+         * Whether or not the clock is currently running
+         * true: it is
+         * false: it's paused
+         */
+        this.putProperty("running", BooleanProperty())
+        /**
+         * Whether or not the clock is finished
+         * true: it is
+         * false: it's running or paused
+         */
+        this.putProperty("finished", BooleanProperty())
     }
 
     override fun start() {
-        this.getProperty<Boolean>("run").setValue(true)
-
-        this.run()
+        this.getProperty<Boolean>("running").setValue(true)
     }
 
-    override fun run() {
-        while (this.getProperty<Boolean>("run").getValue()) {
-            tick()
-        }
-    }
-
-    override fun tick() {
-        for (iUpdate in this.iUpdateList) {
-            iUpdate.preUpdate()
-            iUpdate.update()
-            iUpdate.postUpdate()
-        }
-    }
-
-    override fun addObject(obj: O) {
+    fun addObject(obj: T) {
         this.iUpdateList.add(obj)
     }
+
+    fun getObject(index: Int): T =
+            this.iUpdateList[index]
+
+    fun getAllObjects(): List<T> = this.iUpdateList
+
 }

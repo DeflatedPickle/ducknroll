@@ -1,6 +1,6 @@
 package com.deflatedpickle.ducknroll.common.api.clock
 
-interface IClock<T, O> {
+interface IClock<O> {
     /**
      * Begins the clock
      */
@@ -10,14 +10,4 @@ interface IClock<T, O> {
      * Furthers the clock
      */
     fun tick()
-
-    /**
-     * Runs the clock
-     */
-    fun run()
-
-    /**
-     * Tells the clock to manage this object
-     */
-    fun addObject(obj: O)
 }
