@@ -1,13 +1,12 @@
 package example
 
-import com.deflatedpickle.ducknroll.common.api.area.Area
-import com.deflatedpickle.ducknroll.common.api.clock.StepTickClock
+import com.deflatedpickle.ducknroll.common.common.area.Area
+import com.deflatedpickle.ducknroll.common.common.clock.StepTickClock
 import com.deflatedpickle.ducknroll.common.api.component.IComponent
-import com.deflatedpickle.ducknroll.common.api.dimension.Dimension
-import com.deflatedpickle.ducknroll.common.api.entity.Player
-import com.deflatedpickle.ducknroll.common.api.util.CommonProperties
-import com.deflatedpickle.ducknroll.common.world.World
-import com.deflatedpickle.ducknroll.common.world.WorldTimeDate
+import com.deflatedpickle.ducknroll.common.common.dimension.Dimension
+import com.deflatedpickle.ducknroll.common.common.entity.Player
+import com.deflatedpickle.ducknroll.common.common.world.World
+import com.deflatedpickle.ducknroll.common.common.world.WorldTimeDate
 
 fun main() {
     val world = World()
@@ -15,25 +14,25 @@ fun main() {
     var input: String?
     val timeDate = WorldTimeDate()
     world.clock = StepTickClock(
-            world = world,
-            updateCallback = {
-                print("> ")
+        world = world,
+        updateCallback = {
+            print("> ")
 
-                input = readLine()
-                if (input != null &&
-                        input!!.trim() != "") {
-                    it.step(20)
-                    println(timeDate.getTime())
-                }
-                else {
-                    println(
-                            "I'm not quite sure that I" +
+            input = readLine()
+            if (input != null &&
+                input!!.trim() != ""
+            ) {
+                it.step(20)
+                println(timeDate.getTime())
+            } else {
+                println(
+                    "I'm not quite sure that I" +
                             " understood that, could you try again?"
-                    )
-                }
-
-                it.update()
+                )
             }
+
+            it.update()
+        }
     )
     world.addComponent(timeDate)
 
@@ -52,7 +51,6 @@ fun main() {
     val player = Player("Kevin")
     player.addComponent(object : IComponent {
         override fun update() {
-            println("bbbbbbbbbbbbbbbb")
         }
 
         override fun catchup() {

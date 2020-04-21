@@ -1,12 +1,12 @@
-package com.deflatedpickle.ducknroll.common.api.clock
+package com.deflatedpickle.ducknroll.common.common.clock
 
 import com.deflatedpickle.ducknroll.common.api.`object`.Object
-import com.deflatedpickle.ducknroll.common.api.area.Area
-import com.deflatedpickle.ducknroll.common.api.dimension.Dimension
-import com.deflatedpickle.ducknroll.common.api.various.IUpdate
+import com.deflatedpickle.ducknroll.common.api.clock.AbstractClock
+import com.deflatedpickle.ducknroll.common.common.area.Area
+import com.deflatedpickle.ducknroll.common.common.dimension.Dimension
 import com.deflatedpickle.ducknroll.common.api.util.CommonProperties
 import com.deflatedpickle.ducknroll.common.api.various.ICatchup
-import com.deflatedpickle.ducknroll.common.world.World
+import com.deflatedpickle.ducknroll.common.common.world.World
 
 /**
  * An implementation of [AbstractClock] that will update when ticked

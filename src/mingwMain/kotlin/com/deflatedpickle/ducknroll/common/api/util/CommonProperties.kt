@@ -1,9 +1,9 @@
 package com.deflatedpickle.ducknroll.common.api.util
 
-import com.deflatedpickle.ducknroll.common.api.area.Area
+import com.deflatedpickle.ducknroll.common.common.area.Area
 import com.deflatedpickle.ducknroll.common.api.clock.AbstractClock
-import com.deflatedpickle.ducknroll.common.api.clock.StepTickClock
-import com.deflatedpickle.ducknroll.common.api.dimension.Dimension
+import com.deflatedpickle.ducknroll.common.common.clock.StepTickClock
+import com.deflatedpickle.ducknroll.common.common.dimension.Dimension
 
 /**
  * An enum of commonly used properties

@@ -1,8 +1,6 @@
-package com.deflatedpickle.ducknroll.common.world
+package com.deflatedpickle.ducknroll.common.common.world
 
-import com.deflatedpickle.ducknroll.common.api.`object`.Object
 import com.deflatedpickle.ducknroll.common.api.component.IComponent
-import com.deflatedpickle.ducknroll.common.api.various.IUpdate
 import com.deflatedpickle.ducknroll.common.api.property.CompoundProperty
 import com.deflatedpickle.ducknroll.common.api.property.IntProperty
 import com.deflatedpickle.ducknroll.common.api.property.PropertyHolder

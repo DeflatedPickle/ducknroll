@@ -1,4 +1,4 @@
-package com.deflatedpickle.ducknroll.common.api.area
+package com.deflatedpickle.ducknroll.common.common.area
 
 import com.deflatedpickle.ducknroll.common.api.`object`.Object
 import com.deflatedpickle.ducknroll.common.api.property.ListProperty

@@ -1,6 +1,6 @@
-package com.deflatedpickle.ducknroll.common.api.dimension
+package com.deflatedpickle.ducknroll.common.common.dimension
 
-import com.deflatedpickle.ducknroll.common.api.area.Area
+import com.deflatedpickle.ducknroll.common.common.area.Area
 import com.deflatedpickle.ducknroll.common.api.property.ListProperty
 import com.deflatedpickle.ducknroll.common.api.property.PropertyHolder
 import com.deflatedpickle.ducknroll.common.api.util.CommonProperties

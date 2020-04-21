@@ -1,10 +1,9 @@
-package com.deflatedpickle.ducknroll.common.api.clock
+package com.deflatedpickle.ducknroll.common.common.clock
 
 import com.deflatedpickle.ducknroll.common.api.`object`.Object
-import com.deflatedpickle.ducknroll.common.api.various.IUpdate
 import com.deflatedpickle.ducknroll.common.api.util.CommonProperties
 import com.deflatedpickle.ducknroll.common.api.various.IRun
-import com.deflatedpickle.ducknroll.common.world.World
+import com.deflatedpickle.ducknroll.common.common.world.World
 
 /**
  * A clock based on real-time ticks
