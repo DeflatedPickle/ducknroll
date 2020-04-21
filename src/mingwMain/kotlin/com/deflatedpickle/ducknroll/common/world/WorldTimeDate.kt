@@ -1,6 +1,8 @@
 package com.deflatedpickle.ducknroll.common.world
 
-import com.deflatedpickle.ducknroll.common.api.entity.IUpdate
+import com.deflatedpickle.ducknroll.common.api.`object`.Object
+import com.deflatedpickle.ducknroll.common.api.component.IComponent
+import com.deflatedpickle.ducknroll.common.api.various.IUpdate
 import com.deflatedpickle.ducknroll.common.api.property.CompoundProperty
 import com.deflatedpickle.ducknroll.common.api.property.IntProperty
 import com.deflatedpickle.ducknroll.common.api.property.PropertyHolder
@@ -8,7 +10,7 @@ import com.deflatedpickle.ducknroll.common.api.property.PropertyHolder
 /**
  * A clock to store the time and date of a world
  */
-class WorldTimeDate : PropertyHolder(), IUpdate {
+class WorldTimeDate : PropertyHolder(), IComponent {
     init {
         with(this.putCompoundProperty("time", CompoundProperty<Any>())) {
             this.putProperty("second", IntProperty(0))
@@ -56,6 +58,9 @@ class WorldTimeDate : PropertyHolder(), IUpdate {
     }
 
     override fun update() {
+    }
+
+    override fun catchup() {
         this.increaseTime()
     }
 }

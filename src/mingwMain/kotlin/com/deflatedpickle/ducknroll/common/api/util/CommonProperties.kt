@@ -1,6 +1,5 @@
 package com.deflatedpickle.ducknroll.common.api.util
 
-import com.deflatedpickle.ducknroll.common.api.`object`.IObject
 import com.deflatedpickle.ducknroll.common.api.area.Area
 import com.deflatedpickle.ducknroll.common.api.clock.AbstractClock
 import com.deflatedpickle.ducknroll.common.api.clock.StepTickClock

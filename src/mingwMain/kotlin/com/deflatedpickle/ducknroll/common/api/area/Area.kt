@@ -1,7 +1,6 @@
 package com.deflatedpickle.ducknroll.common.api.area
 
-import com.deflatedpickle.ducknroll.common.api.`object`.IObject
-import com.deflatedpickle.ducknroll.common.api.entity.IUpdate
+import com.deflatedpickle.ducknroll.common.api.`object`.Object
 import com.deflatedpickle.ducknroll.common.api.property.ListProperty
 import com.deflatedpickle.ducknroll.common.api.property.PropertyHolder
 import com.deflatedpickle.ducknroll.common.api.util.CommonProperties
@@ -9,10 +8,10 @@ import com.deflatedpickle.ducknroll.common.api.util.CommonProperties
 // TODO: Add a time offset for areas
 class Area : PropertyHolder() {
     init {
-        this.putProperty(CommonProperties.OBJECT, ListProperty<IObject>())
+        this.putProperty(CommonProperties.OBJECT, ListProperty<Object>())
     }
 
-    fun spawn(entity: IUpdate) {
-        this.getProperty<MutableList<IObject>>(CommonProperties.OBJECT).getValue().add(entity)
+    fun spawn(entity: Object) {
+        this.getProperty<MutableList<Object>>(CommonProperties.OBJECT).getValue().add(entity)
     }
 }

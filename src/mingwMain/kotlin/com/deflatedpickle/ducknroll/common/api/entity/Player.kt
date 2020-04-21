@@ -10,8 +10,4 @@ class Player(name: String) : Entity(name) {
         this.putProperty(CommonProperties.EXPERIENCE, IntProperty())
         // this.putProperty("title", ListProperty<>())
     }
-
-    override fun update() {
-        println("bbbbbbbbbbbbbbbb")
-    }
 }

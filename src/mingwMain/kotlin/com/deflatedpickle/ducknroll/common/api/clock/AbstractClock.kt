@@ -1,6 +1,6 @@
 package com.deflatedpickle.ducknroll.common.api.clock
 
-import com.deflatedpickle.ducknroll.common.api.entity.IUpdate
+import com.deflatedpickle.ducknroll.common.api.various.IUpdate
 import com.deflatedpickle.ducknroll.common.api.property.BooleanProperty
 import com.deflatedpickle.ducknroll.common.api.property.PropertyHolder
 

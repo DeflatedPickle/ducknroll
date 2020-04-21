@@ -1,4 +1,4 @@
-package com.deflatedpickle.ducknroll.common.api.clock
+package com.deflatedpickle.ducknroll.common.api.various
 
 interface IRun {
     /**
