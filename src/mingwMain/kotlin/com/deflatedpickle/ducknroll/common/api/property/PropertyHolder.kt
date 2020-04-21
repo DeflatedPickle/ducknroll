@@ -23,6 +23,9 @@ abstract class PropertyHolder {
     fun <T> getProperty(commonProperty: CommonProperties): IProperty<T> =
             this.getProperty(commonProperty.key)
 
+    inline fun <reified T> getFirstPropertyOfType(): IProperty<T> =
+        this.getAllProperties().toList().first { it.second.getValue() is T }.second as IProperty<T>
+
     /**
      * Returns the value of a property cast to the given generic
      */
@@ -44,8 +47,8 @@ abstract class PropertyHolder {
     /**
      * Returns all the properties
      */
-    fun <T> getAllProperties(): Map<String, IProperty<T>> =
-            propertyList.mapValues { it.value as IProperty<T> }
+    fun getAllProperties(): Map<String, IProperty<*>> =
+            propertyList.mapValues { it.value }
 
     /**
      * Uses [hasProperty], returns [getProperty] if true, else null

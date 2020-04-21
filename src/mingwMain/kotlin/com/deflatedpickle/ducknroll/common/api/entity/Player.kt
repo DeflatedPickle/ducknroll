@@ -12,5 +12,6 @@ class Player(name: String) : Entity(name) {
     }
 
     override fun update() {
+        println("bbbbbbbbbbbbbbbb")
     }
 }

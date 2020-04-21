@@ -2,22 +2,24 @@ package com.deflatedpickle.ducknroll.common.api.clock
 
 import com.deflatedpickle.ducknroll.common.api.entity.IUpdate
 import com.deflatedpickle.ducknroll.common.api.util.CommonProperties
+import com.deflatedpickle.ducknroll.common.world.World
 
 /**
  * A clock based on real-time ticks
  */
 open class StepTickClock<T : IUpdate>(
+        world: World,
         /**
          * This callback is called constantly
          */
-        val constantCallback: (clock: StepTickClock<T>) -> Unit = {},
+        val updateCallback: (clock: StepTickClock<T>) -> Unit = {},
         /**
-         * This callback is called when the [getCurrentTicks] is different
+         * This update is called until [lastTicks] matches [getCurrentTicks]
          */
-        val updateCallback: (clock: StepTickClock<T>) -> Unit = {
+        val catchupCallback: (clock: StepTickClock<T>) -> Unit = {
             it.tick()
         }
-) : UpdateClock<T>(), IRun {
+) : UpdateClock<T>(world), IRun {
     private var lastTicks = 0
     private var currentTicks = 0
 
@@ -32,10 +34,10 @@ open class StepTickClock<T : IUpdate>(
 
     override fun run() {
         while (!this.getPropertyValue<Boolean>(CommonProperties.FINISHED)) {
-            this.constantCallback(this)
+            this.updateCallback(this)
 
             for (i in this.lastTicks until this.currentTicks) {
-                this.updateCallback(this)
+                this.catchupCallback(this)
             }
             this.lastTicks = this.currentTicks
         }
