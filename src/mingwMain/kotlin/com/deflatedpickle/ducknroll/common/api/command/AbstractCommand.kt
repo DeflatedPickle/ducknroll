@@ -17,7 +17,7 @@ abstract class AbstractCommand(
 
     override fun fail(): String = "That isn't a valid command and/or argument"
 
-    override fun <T : IHasRegistry> getRegistry(): IRegistry<String, KFunction2<IHasRegistry, List<Any>, Unit>> =
+    override fun <T : IHasRegistry> getRegistry(): IRegistry<String, KFunction<IHasRegistry>> =
         Registries.command
 
     fun argumentCheck() {

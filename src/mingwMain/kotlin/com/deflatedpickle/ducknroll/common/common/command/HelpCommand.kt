@@ -7,7 +7,4 @@ class HelpCommand : AbstractCommand("help", 1, 1) {
         this.argumentCheck()
         return false
     }
-
-    override fun create(arguments: List<Any>): AbstractCommand =
-        this.apply { this.arguments.addAll(arguments) }
 }
