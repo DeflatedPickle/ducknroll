@@ -1,5 +1,6 @@
 package com.deflatedpickle.ducknroll.common.common.parser
 
+import com.deflatedpickle.ducknroll.common.api.command.AbstractCommand
 import com.deflatedpickle.ducknroll.common.api.command.ICommand
 import com.deflatedpickle.ducknroll.common.api.parser.IParse
 import com.deflatedpickle.ducknroll.common.common.command.HelpCommand
@@ -11,11 +12,12 @@ object CommandParser : IParse<String, ICommand> {
         val split = input.split(' ')
 
         // Check if it's valid
-        if (Registries.command.has(split[0])) {
+        val command = Registries.command
+        if (command.has(split[0])) {
             // Wow, command! You're so valid uwu
-            with(HelpCommand()) {
-                Registries.command.get(split[0])?.invoke(this, split.drop(1))
-                return this
+            command.get(split[0])?.invoke()?.let {
+                (it as AbstractCommand).arguments.addAll(split.drop(1))
+                return it
             }
         }
         else {

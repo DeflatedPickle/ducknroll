@@ -11,12 +11,11 @@ import com.deflatedpickle.ducknroll.common.common.entity.Player
 import com.deflatedpickle.ducknroll.common.common.registry.Registries
 import com.deflatedpickle.ducknroll.common.common.world.World
 import com.deflatedpickle.ducknroll.common.common.world.WorldTimeDate
-import kotlin.reflect.KFunction2
+import kotlin.reflect.KFunction
 
 fun main() {
     // As funny rat man says, this should be *automated*
-    // Also, get rid of that cast
-    Registries.command.register("help", HelpCommand::create as KFunction2<IHasRegistry, List<Any>, Unit>)
+    Registries.command.register("help", ::HelpCommand)
 
     val world = World()
 
