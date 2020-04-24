@@ -15,7 +15,6 @@ import kotlin.reflect.KFunction
 
 fun main() {
     // As funny rat man says, this should be *automated*
-    // Also, get rid of that cast
     Registries.command.register("help", ::HelpCommand)
 
     val world = World()

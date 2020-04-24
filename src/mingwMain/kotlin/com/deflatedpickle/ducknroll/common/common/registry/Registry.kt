@@ -6,7 +6,7 @@ import com.deflatedpickle.ducknroll.common.common.command.HelpCommand
 import kotlin.reflect.KFunction
 import kotlin.reflect.KFunction2
 
-class Registry<K, V : KFunction<IHasRegistry>> : IRegistry<K, V> {
+class Registry<K, V : () -> IHasRegistry> : IRegistry<K, V> {
     private val items = mutableMapOf<K, V>()
 
     override fun register(key: K, value: V) {
