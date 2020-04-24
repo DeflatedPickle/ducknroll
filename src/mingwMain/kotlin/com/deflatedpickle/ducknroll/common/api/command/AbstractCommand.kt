@@ -29,8 +29,17 @@ abstract class AbstractCommand(
                 println("Sorry, you have provided too many arguments")
             }
             else -> {
-                // TODO: For commands, add some way to define valid arguments
-                println("Sorry, I don't know that argument")
+                val validArguments = this.arguments.filter {
+                    this.isArgumentValid(it)
+                }
+
+                with (this.arguments.filterNot { it in validArguments }) {
+                    if (this.isNotEmpty()) {
+                        println("Sorry, I don't know the arguments: $this")
+                    }
+                }
+
+                arguments.removeAll { it !in validArguments }
             }
         }
     }

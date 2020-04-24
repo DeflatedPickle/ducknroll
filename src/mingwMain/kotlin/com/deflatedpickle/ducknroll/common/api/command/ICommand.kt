@@ -1,11 +1,11 @@
 package com.deflatedpickle.ducknroll.common.api.command
 
 import com.deflatedpickle.ducknroll.common.api.registry.IHasRegistry
-import com.deflatedpickle.ducknroll.common.api.various.ICreated
 
 // TODO: Commands need an enum for categories
-interface ICommand : IHasRegistry /*, ICreated<ICommand>*/ {
+interface ICommand : IHasRegistry {
     fun getName(): String
+    fun isArgumentValid(argument: Any): Boolean
 
     fun run(): Boolean
     fun fail(): String
