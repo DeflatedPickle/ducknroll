@@ -4,6 +4,7 @@ import com.deflatedpickle.ducknroll.common.area.Area
 import com.deflatedpickle.ducknroll.common.clock.StepTickClock
 import com.deflatedpickle.ducknroll.common.api.component.IComponent
 import com.deflatedpickle.ducknroll.common.api.matrix.Matrix
+import com.deflatedpickle.ducknroll.common.api.property.StringProperty
 import com.deflatedpickle.ducknroll.common.api.util.CommonProperties
 import com.deflatedpickle.ducknroll.common.command.HelpCommand
 import com.deflatedpickle.ducknroll.common.component.InventoryComponent
@@ -67,7 +68,7 @@ fun main() {
     world.getFirstPropertyOfType<MutableList<Dimension>>().getValue().add(normalDimension)
 
     val player = Player()
-    player.setName("Kevin")
+    player.putProperty(CommonProperties.NAME, StringProperty("Kevin"))
     // Add a pre-made component
     player.addComponent(InventoryComponent())
     // Add a custom component

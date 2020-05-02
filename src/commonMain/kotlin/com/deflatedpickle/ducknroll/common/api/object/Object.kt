@@ -13,8 +13,7 @@ import kotlin.reflect.KClass
 abstract class Object : PropertyHolder(),
     ComponentHolder,
     IUpdate,
-    ICatchup,
-    IName {
+    ICatchup {
     private val componentList = mutableListOf<IComponent>()
 
     override fun update() {
@@ -43,11 +42,5 @@ abstract class Object : PropertyHolder(),
     override fun getAllComponents(type: KClass<IComponent>): List<IComponent> =
         this.componentList.filter { it::class == type  }
 
-    override fun getName(): String = this.getProperty<String>("name").getValue()
-    override fun setName(value: String) {
-        this.putProperty(
-            CommonProperties.NAME,
-            StringProperty(value)
-        )
-    }
+    override fun toString(): String = "${this::class.simpleName} { properties=${this.getAllProperties()}, components=${this.getAllComponents()} }"
 }

@@ -82,4 +82,6 @@ abstract class PropertyHolder {
     fun clearProperties() {
         this.propertyList.clear()
     }
+
+    override fun toString(): String = "${this::class.simpleName} { properties=${this.getAllProperties()} }"
 }
