@@ -1,4 +1,4 @@
-package com.deflatedpickle.ducknroll.common.common.command
+package com.deflatedpickle.ducknroll.common.command
 
 import com.deflatedpickle.ducknroll.common.api.command.AbstractCommand
 

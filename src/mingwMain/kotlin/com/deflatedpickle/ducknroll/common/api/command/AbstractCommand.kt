@@ -2,9 +2,7 @@ package com.deflatedpickle.ducknroll.common.api.command
 
 import com.deflatedpickle.ducknroll.common.api.registry.IHasRegistry
 import com.deflatedpickle.ducknroll.common.api.registry.IRegistry
-import com.deflatedpickle.ducknroll.common.common.registry.Registries
-import kotlin.reflect.KFunction
-import kotlin.reflect.KFunction2
+import com.deflatedpickle.ducknroll.common.registry.Registries
 
 abstract class AbstractCommand(
     private val name: String,

@@ -1,28 +1,29 @@
-package com.deflatedpickle.ducknroll.common.common.clock
+package com.deflatedpickle.ducknroll.common.clock
 
 import com.deflatedpickle.ducknroll.common.api.`object`.Object
 import com.deflatedpickle.ducknroll.common.api.util.CommonProperties
 import com.deflatedpickle.ducknroll.common.api.various.IRun
-import com.deflatedpickle.ducknroll.common.common.world.World
+import com.deflatedpickle.ducknroll.common.world.World
 
 /**
  * A clock based on real-time ticks
  */
 open class StepTickClock<T : Object>(
-        world: World,
-        /**
+    world: World,
+    /**
          * This callback is called constantly
          */
         val updateCallback: (clock: StepTickClock<T>) -> Unit = {
             it.update()
         },
-        /**
+    /**
          * This update is called until [lastTicks] matches [getCurrentTicks]
          */
         val catchupCallback: (clock: StepTickClock<T>) -> Unit = {
             it.catchup()
         }
-) : UpdateClock<T>(world), IRun {
+) : UpdateClock<T>(world),
+    IRun {
     private var lastTicks = 0
     private var currentTicks = 0
 

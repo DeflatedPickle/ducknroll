@@ -1,4 +1,4 @@
-package com.deflatedpickle.ducknroll.common.common.registry
+package com.deflatedpickle.ducknroll.common.registry
 
 import com.deflatedpickle.ducknroll.common.api.command.ICommand
 

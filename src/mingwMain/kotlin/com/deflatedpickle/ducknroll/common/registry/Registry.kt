@@ -1,11 +1,11 @@
-package com.deflatedpickle.ducknroll.common.common.registry
+package com.deflatedpickle.ducknroll.common.registry
 
 import com.deflatedpickle.ducknroll.common.api.registry.IHasRegistry
 import com.deflatedpickle.ducknroll.common.api.registry.IRegistry
-import com.deflatedpickle.ducknroll.common.common.command.HelpCommand
-import kotlin.reflect.KFunction
-import kotlin.reflect.KFunction2
 
+/**
+ * @sample Registries.command
+ */
 class Registry<K, V : () -> IHasRegistry> : IRegistry<K, V> {
     private val items = mutableMapOf<K, V>()
 

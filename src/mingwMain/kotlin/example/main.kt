@@ -1,17 +1,20 @@
 package example
 
-import com.deflatedpickle.ducknroll.common.common.area.Area
-import com.deflatedpickle.ducknroll.common.common.clock.StepTickClock
+import com.deflatedpickle.ducknroll.common.api.`object`.Object
+import com.deflatedpickle.ducknroll.common.area.Area
+import com.deflatedpickle.ducknroll.common.clock.StepTickClock
 import com.deflatedpickle.ducknroll.common.api.component.IComponent
-import com.deflatedpickle.ducknroll.common.api.registry.IHasRegistry
-import com.deflatedpickle.ducknroll.common.common.command.HelpCommand
-import com.deflatedpickle.ducknroll.common.common.parser.CommandParser
-import com.deflatedpickle.ducknroll.common.common.dimension.Dimension
-import com.deflatedpickle.ducknroll.common.common.entity.Player
-import com.deflatedpickle.ducknroll.common.common.registry.Registries
-import com.deflatedpickle.ducknroll.common.common.world.World
-import com.deflatedpickle.ducknroll.common.common.world.WorldTimeDate
-import kotlin.reflect.KFunction
+import com.deflatedpickle.ducknroll.common.api.matrix.Matrix
+import com.deflatedpickle.ducknroll.common.api.util.CommonProperties
+import com.deflatedpickle.ducknroll.common.command.HelpCommand
+import com.deflatedpickle.ducknroll.common.component.InventoryComponent
+import com.deflatedpickle.ducknroll.common.parser.CommandParser
+import com.deflatedpickle.ducknroll.common.dimension.Dimension
+import com.deflatedpickle.ducknroll.common.entity.Player
+import com.deflatedpickle.ducknroll.common.registry.Registries
+import com.deflatedpickle.ducknroll.common.world.World
+import com.deflatedpickle.ducknroll.common.component.TimeDateComponent
+import com.deflatedpickle.ducknroll.common.spot.Spot
 
 fun main() {
     // As funny rat man says, this should be *automated*
@@ -20,7 +23,7 @@ fun main() {
     val world = World()
 
     var input: String?
-    val timeDate = WorldTimeDate()
+    val timeDate = TimeDateComponent()
     world.clock = StepTickClock(
         world = world,
         updateCallback = { clock ->
@@ -55,16 +58,29 @@ fun main() {
     // We add an area to put things in
     // Think of these like a land mass
     // They will have a map and will contain entities and structures
-    val spawnArea = Area()
-    normalDimension.getFirstPropertyOfType<MutableList<Area>>().getValue().add(spawnArea)
+    val spawnArea = Area(18, 10)
+
+    with(normalDimension.getFirstPropertyOfType<MutableList<Area>>().getValue()) {
+        add(spawnArea)
+    }
+
     world.getFirstPropertyOfType<MutableList<Dimension>>().getValue().add(normalDimension)
 
-    val player = Player("Kevin")
+    val player = Player()
+    player.setName("Kevin")
+    // Add a pre-made component
+    player.addComponent(InventoryComponent())
+    // Add a custom component
     player.addComponent(object : IComponent {
         override fun update() {
+            // println("My custom component (update)")
+            println(spawnArea.getProperty<Matrix<Spot>>(
+                CommonProperties.SPOT
+            ).getValue())
         }
 
         override fun catchup() {
+            // println("My custom component (catchup)")
         }
     })
     spawnArea.spawn(player)

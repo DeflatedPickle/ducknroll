@@ -3,11 +3,18 @@ package com.deflatedpickle.ducknroll.common.api.`object`
 import com.deflatedpickle.ducknroll.common.api.component.ComponentHolder
 import com.deflatedpickle.ducknroll.common.api.component.IComponent
 import com.deflatedpickle.ducknroll.common.api.property.PropertyHolder
+import com.deflatedpickle.ducknroll.common.api.property.StringProperty
+import com.deflatedpickle.ducknroll.common.api.util.CommonProperties
 import com.deflatedpickle.ducknroll.common.api.various.ICatchup
+import com.deflatedpickle.ducknroll.common.api.various.IName
 import com.deflatedpickle.ducknroll.common.api.various.IUpdate
 import kotlin.reflect.KClass
 
-abstract class Object : PropertyHolder(), ComponentHolder, IUpdate, ICatchup {
+abstract class Object : PropertyHolder(),
+    ComponentHolder,
+    IUpdate,
+    ICatchup,
+    IName {
     private val componentList = mutableListOf<IComponent>()
 
     override fun update() {
@@ -35,4 +42,12 @@ abstract class Object : PropertyHolder(), ComponentHolder, IUpdate, ICatchup {
 
     override fun getAllComponents(type: KClass<IComponent>): List<IComponent> =
         this.componentList.filter { it::class == type  }
+
+    override fun getName(): String = this.getProperty<String>("name").getValue()
+    override fun setName(value: String) {
+        this.putProperty(
+            CommonProperties.NAME,
+            StringProperty(value)
+        )
+    }
 }

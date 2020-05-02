@@ -1,6 +1,7 @@
 package com.deflatedpickle.ducknroll.common.api.property
 
-abstract class AbstractProperty<T>(private var value: T) : IProperty<T> {
+abstract class AbstractProperty<T>(private var value: T) :
+    IProperty<T> {
     override fun getValue(): T = this.value
 
     override fun setValue(value: T) {

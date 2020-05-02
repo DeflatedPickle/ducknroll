@@ -1,9 +1,11 @@
 package com.deflatedpickle.ducknroll.common.api.util
 
-import com.deflatedpickle.ducknroll.common.common.area.Area
+import com.deflatedpickle.ducknroll.common.area.Area
 import com.deflatedpickle.ducknroll.common.api.clock.AbstractClock
-import com.deflatedpickle.ducknroll.common.common.clock.StepTickClock
-import com.deflatedpickle.ducknroll.common.common.dimension.Dimension
+import com.deflatedpickle.ducknroll.common.clock.StepTickClock
+import com.deflatedpickle.ducknroll.common.dimension.Dimension
+import com.deflatedpickle.ducknroll.common.api.spot.TileType
+import com.deflatedpickle.ducknroll.common.spot.Spot
 
 /**
  * An enum of commonly used properties
@@ -28,6 +30,18 @@ enum class CommonProperties(val key: String) {
     EXPERIENCE("experience"),
 
     /**
+     * The inventory of an object
+     * Type: [List]
+     */
+    INVENTORY("inventory"),
+
+    /**
+     * The type of a tile
+     * Type: [TileType]
+     */
+    TILE_TYPE("type"),
+
+    /**
      * The dimensions of a world
      * Type: [Dimension]
      */
@@ -40,10 +54,28 @@ enum class CommonProperties(val key: String) {
     AREA("area"),
 
     /**
-     * The objects in an [Area]
+     * The spots in an [Area]
      * Type: [IObject]
      */
+    SPOT("spot"),
+
+    /**
+     * The objects in a [Spot]
+     * Type: [List]
+     */
     OBJECT("object"),
+
+    /**
+     * The width of an object
+     * Type: [Int]
+     */
+    WIDTH("width"),
+
+    /**
+     * The height of an object
+     * Type: [Int]
+     */
+    HEIGHT("height"),
 
     /**
      * The running state of an object

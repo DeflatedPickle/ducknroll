@@ -1,12 +1,12 @@
-package com.deflatedpickle.ducknroll.common.common.parser
+package com.deflatedpickle.ducknroll.common.parser
 
 import com.deflatedpickle.ducknroll.common.api.command.AbstractCommand
 import com.deflatedpickle.ducknroll.common.api.command.ICommand
 import com.deflatedpickle.ducknroll.common.api.parser.IParse
-import com.deflatedpickle.ducknroll.common.common.command.HelpCommand
-import com.deflatedpickle.ducknroll.common.common.registry.Registries
+import com.deflatedpickle.ducknroll.common.registry.Registries
 
-object CommandParser : IParse<String, ICommand> {
+object CommandParser :
+    IParse<String, ICommand> {
     // TODO: Create a CommandStack and push commands to it
     override fun parse(input: String): ICommand? {
         val split = input.split(' ')
