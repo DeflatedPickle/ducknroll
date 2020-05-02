@@ -7,20 +7,51 @@ repositories {
 }
 
 kotlin {
+    // These two don't work, look at all these errors!
+    /*Error: One type argument expected for class ThreadLocal<T : Any!>*/
+    jvm()
+    /*Error: Unresolved reference: system
+    Error: Unresolved reference: getTimeNanos
+    Error: Unresolved reference: ThreadLocal
+    Error: Unresolved reference: readLine*/
+    js()
+
+    // These all work, though
+    linuxX64()
+    macosX64()
+    mingwX64()
+    wasm32()
+
     // For ARM, should be changed to iosArm32 or iosArm64
     // For Linux, should be changed to e.g. linuxX64
     // For MacOS, should be changed to e.g. macosX64
     // For Windows, should be changed to e.g. mingwX64
     mingwX64("mingw") {
         binaries {
-            sharedLib {
-                baseName = "ducknroll"
-            }
-
-            executable {
+            executable([DEBUG]) {
                 entryPoint = 'example.main'
 
                 runTask.standardInput = System.in
+            }
+        }
+    }
+
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation kotlin('stdlib-common')
+            }
+        }
+
+        jvmMain {
+            dependencies {
+                implementation kotlin('stdlib-jdk8')
+            }
+        }
+
+        jsMain {
+            dependencies {
+                implementation kotlin('stdlib-js')
             }
         }
     }

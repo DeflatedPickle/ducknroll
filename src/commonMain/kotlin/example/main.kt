@@ -1,6 +1,5 @@
 package example
 
-import com.deflatedpickle.ducknroll.common.api.`object`.Object
 import com.deflatedpickle.ducknroll.common.area.Area
 import com.deflatedpickle.ducknroll.common.clock.StepTickClock
 import com.deflatedpickle.ducknroll.common.api.component.IComponent
@@ -29,6 +28,7 @@ fun main() {
         updateCallback = { clock ->
             print("> ")
 
+            // JS: Unresolved reference
             input = readLine()
 
             input?.let { input ->

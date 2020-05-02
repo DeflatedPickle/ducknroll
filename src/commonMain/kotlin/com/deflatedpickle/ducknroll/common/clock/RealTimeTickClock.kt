@@ -4,6 +4,7 @@ import com.deflatedpickle.ducknroll.common.api.`object`.Object
 import com.deflatedpickle.ducknroll.common.api.util.CommonProperties
 import com.deflatedpickle.ducknroll.common.api.various.IRun
 import com.deflatedpickle.ducknroll.common.world.World
+
 import kotlin.system.getTimeNanos
 
 /**
@@ -12,19 +13,19 @@ import kotlin.system.getTimeNanos
 class RealTimeTickClock<T : Object>(
     world: World,
     /**
-         * The calling interval, in ticks
-         */
-        val interval: Int = 20,
+     * The calling interval, in ticks
+     */
+    val interval: Int = 20,
     /**
-         * This callback is constantly called, before the [updateCallback]
-         */
-        val constantCallback: (clock: RealTimeTickClock<T>) -> Unit = {},
+     * This callback is constantly called, before the [updateCallback]
+     */
+    val constantCallback: (clock: RealTimeTickClock<T>) -> Unit = {},
     /**
-         * This callback is called when the [getCurrentTicks] is different
-         */
-        val updateCallback: (clock: RealTimeTickClock<T>) -> Unit = {
-            it.update()
-        }
+     * This callback is called when the [getCurrentTicks] is different
+     */
+    val updateCallback: (clock: RealTimeTickClock<T>) -> Unit = {
+        it.update()
+    }
 ) : UpdateClock<T>(world),
     IRun {
     private val _interval: Long = 1_000_000_000L / this.interval
