@@ -18,4 +18,8 @@ class MutableListMatrix<T>(
     override fun removeAll(elements: Collection<T>): Boolean = this.list.removeAll(elements)
 
     override fun retainAll(elements: Collection<T>): Boolean = this.list.retainAll(elements)
+
+    override operator fun set(x: Int, y: Int, value: T) {
+        this.list[y * this.columns + x] = value
+    }
 }

@@ -14,12 +14,12 @@ import com.deflatedpickle.ducknroll.common.spot.Spot
 // TODO: Add a time offset for areas
 class Area(width: Int, height: Int) : PropertyHolder() {
     init {
+        // Unlike dimension areas being nullable, spots aren't
+        // This is because a spot can have an AIR tile
         this.putProperty(
             CommonProperties.SPOT,
             MatrixProperty(ListMatrix(width, height) { _: Int, _: Int -> Spot() })
         )
-        this.putProperty(CommonProperties.WIDTH, IntProperty(width))
-        this.putProperty(CommonProperties.HEIGHT, IntProperty(height))
     }
 
     fun spawn(entity: Object, x: Int = 0, y: Int = 0) {

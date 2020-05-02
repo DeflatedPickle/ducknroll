@@ -2,6 +2,7 @@ package com.deflatedpickle.ducknroll.common.clock
 
 import com.deflatedpickle.ducknroll.common.api.`object`.Object
 import com.deflatedpickle.ducknroll.common.api.clock.AbstractClock
+import com.deflatedpickle.ducknroll.common.api.matrix.Matrix
 import com.deflatedpickle.ducknroll.common.area.Area
 import com.deflatedpickle.ducknroll.common.dimension.Dimension
 import com.deflatedpickle.ducknroll.common.api.util.CommonProperties
@@ -15,16 +16,22 @@ import com.deflatedpickle.ducknroll.common.world.World
 open class UpdateClock<T : Object>(val world: World) : AbstractClock<T>(),
     ICatchup {
     override fun update() {
+        // Loop the dimensions
         for (dimension in this.world.getProperty<List<Dimension>>(
             CommonProperties.DIMENSION).getValue()) {
-            for (area in dimension.getProperty<List<Area>>(
+            // Loop the areas
+            for (area in dimension.getProperty<Matrix<Area?>>(
                 CommonProperties.AREA).getValue()) {
-                for (spot in area.getProperty<List<Spot>>(
-                    CommonProperties.SPOT).getValue()) {
-                    // Heh... objeKT
-                    for (objekt in spot.getProperty<List<Object>>(
-                        CommonProperties.OBJECT).getValue()) {
-                        objekt.update()
+                // Loop the spots
+                // Remember, area's are nullable to allow for non-rectangular maps!
+                if (area != null) {
+                    for (spot in area.getProperty<Matrix<Spot>>(
+                        CommonProperties.SPOT).getValue()) {
+                        // Heh... objeKT
+                        for (objekt in spot.getProperty<List<Object>>(
+                            CommonProperties.OBJECT).getValue()) {
+                            objekt.update()
+                        }
                     }
                 }
             }

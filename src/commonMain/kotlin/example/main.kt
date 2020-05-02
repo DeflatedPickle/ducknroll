@@ -4,6 +4,8 @@ import com.deflatedpickle.ducknroll.common.area.Area
 import com.deflatedpickle.ducknroll.common.clock.StepTickClock
 import com.deflatedpickle.ducknroll.common.api.component.IComponent
 import com.deflatedpickle.ducknroll.common.api.matrix.Matrix
+import com.deflatedpickle.ducknroll.common.api.matrix.MutableListMatrix
+import com.deflatedpickle.ducknroll.common.api.matrix.MutableMatrix
 import com.deflatedpickle.ducknroll.common.api.property.StringProperty
 import com.deflatedpickle.ducknroll.common.api.util.CommonProperties
 import com.deflatedpickle.ducknroll.common.command.HelpCommand
@@ -54,15 +56,18 @@ fun main() {
     // We need to add a general dimension
     // Think of these like the overworld, nether and end in Minecraft
     // These will contain areas
-    val normalDimension = Dimension()
+    val normalDimension = Dimension(4, 4)
 
     // We add an area to put things in
     // Think of these like a land mass
     // They will have a map and will contain entities and structures
     val spawnArea = Area(18, 10)
 
-    with(normalDimension.getFirstPropertyOfType<MutableList<Area>>().getValue()) {
-        add(spawnArea)
+    val tinyForest = Area(5, 5)
+
+    with(normalDimension.getProperty<MutableListMatrix<Area>>(CommonProperties.AREA).getValue()) {
+        this[0, 1] = tinyForest
+        this[1, 1] = spawnArea
     }
 
     world.getFirstPropertyOfType<MutableList<Dimension>>().getValue().add(normalDimension)
@@ -74,14 +79,11 @@ fun main() {
     // Add a custom component
     player.addComponent(object : IComponent {
         override fun update() {
-            // println("My custom component (update)")
-            println(spawnArea.getProperty<Matrix<Spot>>(
-                CommonProperties.SPOT
-            ).getValue())
+            println("My custom component (update)")
         }
 
         override fun catchup() {
-            // println("My custom component (catchup)")
+            println("My custom component (catchup)")
         }
     })
     spawnArea.spawn(player)
