@@ -1,34 +1,41 @@
 package example
 
-import com.deflatedpickle.ducknroll.common.area.Area
-import com.deflatedpickle.ducknroll.common.clock.StepTickClock
 import com.deflatedpickle.ducknroll.common.api.component.IComponent
-import com.deflatedpickle.ducknroll.common.api.matrix.Matrix
 import com.deflatedpickle.ducknroll.common.api.matrix.MutableListMatrix
-import com.deflatedpickle.ducknroll.common.api.matrix.MutableMatrix
 import com.deflatedpickle.ducknroll.common.api.property.StringProperty
 import com.deflatedpickle.ducknroll.common.api.util.CommonProperties
+import com.deflatedpickle.ducknroll.common.area.Area
+import com.deflatedpickle.ducknroll.common.clock.StepTickClock
 import com.deflatedpickle.ducknroll.common.command.HelpCommand
+import com.deflatedpickle.ducknroll.common.command.MapCommand
 import com.deflatedpickle.ducknroll.common.component.InventoryComponent
-import com.deflatedpickle.ducknroll.common.parser.CommandParser
+import com.deflatedpickle.ducknroll.common.component.TimeDateComponent
 import com.deflatedpickle.ducknroll.common.dimension.Dimension
 import com.deflatedpickle.ducknroll.common.entity.Player
+import com.deflatedpickle.ducknroll.common.parser.CommandParser
 import com.deflatedpickle.ducknroll.common.registry.Registries
 import com.deflatedpickle.ducknroll.common.world.World
-import com.deflatedpickle.ducknroll.common.component.TimeDateComponent
-import com.deflatedpickle.ducknroll.common.spot.Spot
 
 fun main() {
     // As funny rat man says, this should be *automated*
     Registries.command.register("help", ::HelpCommand)
+    Registries.command.register("map", ::MapCommand)
 
     val world = World()
+
+    val player = Player()
 
     var input: String?
     val timeDate = TimeDateComponent()
     world.clock = StepTickClock(
         world = world,
         updateCallback = { clock ->
+            // This line or any usage of player from the functions it's passed into
+            // All result in a crash.
+            // I thought it might be a scoping issue, so I put it in a static, thread local object
+            // Same error!
+            // println(player)
+            
             print("> ")
 
             // JS: Unresolved reference
@@ -38,7 +45,8 @@ fun main() {
                 if (input.trim() != "") {
                     CommandParser.parse(input)?.let {
                         when (it) {
-                            is HelpCommand -> it.run()
+                            is HelpCommand -> it.run(player)
+                            is MapCommand -> it.run(player)
                             else -> {
                                 clock.step(20)
                                 println(timeDate.getTime())
@@ -65,14 +73,12 @@ fun main() {
 
     val tinyForest = Area(5, 5)
 
-    with(normalDimension.getProperty<MutableListMatrix<Area>>(CommonProperties.AREA).getValue()) {
-        this[0, 1] = tinyForest
-        this[1, 1] = spawnArea
-    }
+    normalDimension.addArea(tinyForest, 0, 1)
+    normalDimension.addArea(spawnArea, 1, 1)
 
-    world.getFirstPropertyOfType<MutableList<Dimension>>().getValue().add(normalDimension)
+    world.addDimension(normalDimension)
 
-    val player = Player()
+    // Give them a name
     player.putProperty(CommonProperties.NAME, StringProperty("Kevin"))
     // Add a pre-made component
     player.addComponent(InventoryComponent())

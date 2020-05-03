@@ -6,6 +6,7 @@ import com.deflatedpickle.ducknroll.common.clock.StepTickClock
 import com.deflatedpickle.ducknroll.common.dimension.Dimension
 import com.deflatedpickle.ducknroll.common.api.spot.TileType
 import com.deflatedpickle.ducknroll.common.spot.Spot
+import com.deflatedpickle.ducknroll.common.world.World
 
 /**
  * An enum of commonly used properties
@@ -40,6 +41,12 @@ enum class CommonProperties(val key: String) {
      * Type: [TileType]
      */
     TILE_TYPE("type"),
+
+    /**
+     * The world of a dimension
+     * Type: [World]
+     */
+    WORLD("world"),
 
     /**
      * The dimensions of a world

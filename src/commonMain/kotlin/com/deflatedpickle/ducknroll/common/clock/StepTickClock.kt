@@ -11,17 +11,17 @@ import com.deflatedpickle.ducknroll.common.world.World
 open class StepTickClock<T : Object>(
     world: World,
     /**
-         * This callback is called constantly
-         */
-        val updateCallback: (clock: StepTickClock<T>) -> Unit = {
-            it.update()
-        },
+     * This callback is called constantly
+     */
+    val updateCallback: (clock: StepTickClock<T>) -> Unit = {
+        it.update()
+    },
     /**
-         * This update is called until [lastTicks] matches [getCurrentTicks]
-         */
-        val catchupCallback: (clock: StepTickClock<T>) -> Unit = {
-            it.catchup()
-        }
+     * This update is called until [lastTicks] matches [getCurrentTicks]
+     */
+    val catchupCallback: (clock: StepTickClock<T>) -> Unit = {
+        it.catchup()
+    }
 ) : UpdateClock<T>(world),
     IRun {
     private var lastTicks = 0
