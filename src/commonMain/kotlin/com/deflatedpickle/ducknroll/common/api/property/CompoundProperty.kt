@@ -2,6 +2,7 @@ package com.deflatedpickle.ducknroll.common.api.property
 
 class CompoundProperty<T> : PropertyHolder(),
     IProperty<Map<String, IProperty<T>>> {
+    @Suppress("UNCHECKED_CAST")
     override fun getValue(): Map<String, IProperty<T>> =
             this.propertyList as Map<String, IProperty<T>>
 

@@ -1,5 +1,6 @@
 package example
 
+import com.deflatedpickle.ducknroll.common.api.`object`.Object
 import com.deflatedpickle.ducknroll.common.api.component.IComponent
 import com.deflatedpickle.ducknroll.common.api.matrix.MutableListMatrix
 import com.deflatedpickle.ducknroll.common.api.property.StringProperty
@@ -27,15 +28,16 @@ fun main() {
 
     var input: String?
     val timeDate = TimeDateComponent()
-    world.clock = StepTickClock(
-        world = world,
-        updateCallback = { clock ->
+    // We want to do different things on update,
+    // so we need to extend it
+    world.clock = object : StepTickClock<Object>(world = world) {
+        override fun update() {
             // This line or any usage of player from the functions it's passed into
             // All result in a crash.
             // I thought it might be a scoping issue, so I put it in a static, thread local object
             // Same error!
             // println(player)
-            
+
             print("> ")
 
             // JS: Unresolved reference
@@ -48,7 +50,7 @@ fun main() {
                             is HelpCommand -> it.run(player)
                             is MapCommand -> it.run(player)
                             else -> {
-                                clock.step(20)
+                                this.step(20)
                                 println(timeDate.getTime())
                             }
                         }
@@ -56,9 +58,9 @@ fun main() {
                 }
             }
 
-            clock.update()
+            super.update()
         }
-    )
+    }
     world.addComponent(timeDate)
 
     // We need to add a general dimension

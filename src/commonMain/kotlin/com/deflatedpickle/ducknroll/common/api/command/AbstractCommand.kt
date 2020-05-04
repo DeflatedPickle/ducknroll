@@ -15,6 +15,7 @@ abstract class AbstractCommand(
 
     override fun fail(): String = "That isn't a valid command and/or argument"
 
+    @Suppress("UNCHECKED_CAST")
     override fun <T : IHasRegistry> getRegistry(): IRegistry<String, () -> T> =
         Registries.command as IRegistry<String, () -> T>
 

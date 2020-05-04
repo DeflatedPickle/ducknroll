@@ -14,6 +14,7 @@ abstract class PropertyHolder {
     /**
      * Returns a property cast to the given generic
      */
+    @Suppress("UNCHECKED_CAST")
     fun <T> getProperty(key: String): IProperty<T> =
             propertyList[key] as IProperty<T>
 
@@ -23,24 +24,28 @@ abstract class PropertyHolder {
     fun <T> getProperty(commonProperty: CommonProperties): IProperty<T> =
             this.getProperty(commonProperty.key)
 
+    @Suppress("UNCHECKED_CAST")
     inline fun <reified T> getFirstPropertyOfType(): IProperty<T> =
         this.getAllProperties().toList().first { it.second.getValue() is T }.second as IProperty<T>
 
     /**
      * Returns the value of a property cast to the given generic
      */
+    @Suppress("UNCHECKED_CAST")
     fun <T> getPropertyValue(key: String): T =
             propertyList[key]?.getValue() as T
 
     /**
      * Returns the value of a property cast to the given generic, using a common property
      */
+    @Suppress("UNCHECKED_CAST")
     fun <T> getPropertyValue(commonProperty: CommonProperties): T =
             propertyList[commonProperty.key]?.getValue() as T
 
     /**
      * Returns a property cast to a compound property
      */
+    @Suppress("UNCHECKED_CAST")
     fun <T> getCompoundProperty(key: String): CompoundProperty<T> =
             propertyList[key] as CompoundProperty<T>
 
@@ -73,6 +78,7 @@ abstract class PropertyHolder {
     /**
      * Stores a compound containing other properties
      */
+    @Suppress("UNCHECKED_CAST")
     fun <T> putCompoundProperty(key: String, property: IProperty<T>): CompoundProperty<T> =
             putProperty(key, property) as CompoundProperty<T>
 

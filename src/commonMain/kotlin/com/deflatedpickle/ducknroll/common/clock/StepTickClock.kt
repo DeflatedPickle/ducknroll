@@ -8,22 +8,7 @@ import com.deflatedpickle.ducknroll.common.world.World
 /**
  * A clock based on real-time ticks
  */
-open class StepTickClock<T : Object>(
-    world: World,
-    /**
-     * This callback is called constantly
-     */
-    val updateCallback: (clock: StepTickClock<T>) -> Unit = {
-        it.update()
-    },
-    /**
-     * This update is called until [lastTicks] matches [getCurrentTicks]
-     */
-    val catchupCallback: (clock: StepTickClock<T>) -> Unit = {
-        it.catchup()
-    }
-) : UpdateClock<T>(world),
-    IRun {
+open class StepTickClock<T : Object>(world: World) : UpdateClock<T>(world), IRun {
     private var lastTicks = 0
     private var currentTicks = 0
 
@@ -38,10 +23,10 @@ open class StepTickClock<T : Object>(
 
     override fun run() {
         while (!this.getPropertyValue<Boolean>(CommonProperties.FINISHED)) {
-            this.updateCallback(this)
+            this.update()
 
             for (i in this.lastTicks until this.currentTicks) {
-                this.catchupCallback(this)
+                this.catchup()
             }
             this.lastTicks = this.currentTicks
         }
