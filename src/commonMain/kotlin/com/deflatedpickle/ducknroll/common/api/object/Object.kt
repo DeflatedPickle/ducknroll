@@ -28,14 +28,16 @@ abstract class Object : PropertyHolder(),
         }
     }
 
-    override fun addComponent(component: IComponent): IComponent =
+    override fun <T : IComponent> addComponent(component: T): T =
         component.also { this.componentList.add(it) }
 
-    override fun getComponent(index: Int): IComponent =
-        this.componentList[index]
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : IComponent> getComponent(index: Int): T =
+        this.componentList[index] as T
 
-    override fun getComponent(type: KClass<IComponent>): IComponent? =
-        this.componentList.single { it::class == type }
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : IComponent> getComponent(type: KClass<T>): T? =
+        this.componentList.single { it::class == type } as T?
 
     override fun getAllComponents(): List<IComponent> = this.componentList
 

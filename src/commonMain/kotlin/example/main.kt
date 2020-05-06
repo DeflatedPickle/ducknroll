@@ -22,12 +22,12 @@ fun main() {
     Registries.command.register("help", ::HelpCommand)
     Registries.command.register("map", ::MapCommand)
 
-    val world = World()
+    val world = World().apply {
+        addComponent(TimeDateComponent())
+    }
 
     val player = Player()
 
-    var input: String?
-    val timeDate = TimeDateComponent()
     // We want to do different things on update,
     // so we need to extend it
     world.clock = object : StepTickClock<Object>(world = world) {
@@ -41,9 +41,7 @@ fun main() {
             print("> ")
 
             // JS: Unresolved reference
-            input = readLine()
-
-            input?.let { input ->
+            readLine()?.let { input ->
                 if (input.trim() != "") {
                     CommandParser.parse(input)?.let {
                         when (it) {
@@ -51,7 +49,7 @@ fun main() {
                             is MapCommand -> it.run(player)
                             else -> {
                                 this.step(20)
-                                println(timeDate.getTime())
+                                println(this.world.getComponent(TimeDateComponent::class)?.getTime())
                             }
                         }
                     }
@@ -61,7 +59,6 @@ fun main() {
             super.update()
         }
     }
-    world.addComponent(timeDate)
 
     // We need to add a general dimension
     // Think of these like the overworld, nether and end in Minecraft

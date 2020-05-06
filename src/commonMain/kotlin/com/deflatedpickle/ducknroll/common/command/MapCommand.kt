@@ -11,13 +11,15 @@ class MapCommand : AbstractCommand("map", 1, 1) {
     override fun run(executor: Object): Boolean {
         this.argumentCheck()
 
-        when (this.arguments[0]) {
-            "world" -> {
-            }
-            "dimension" -> {
-            }
-            "area" -> {
-                println(executor.getAllProperties())
+        if (this.arguments.size > 0) {
+            when (this.arguments[0]) {
+                "world" -> {
+                }
+                "dimension" -> {
+                }
+                "area" -> {
+                    executor.getAllProperties()
+                }
             }
         }
 
